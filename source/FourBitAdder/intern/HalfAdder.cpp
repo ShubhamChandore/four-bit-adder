@@ -1,4 +1,6 @@
 #include "HalfAdder.h"
+// Constructor for the HalfAdder class
+// Initializes the logic gates (AND, OR, NAND, XOR)
 
 HalfAdder::HalfAdder()
 {
@@ -7,7 +9,8 @@ HalfAdder::HalfAdder()
     nand_gate = new NAND(3);
     xor_gate = new AND(4);
 }
-
+// Destructor for the HalfAdder class
+// Cleans up dynamically allocated gates
 HalfAdder::~HalfAdder()
 {
     delete and_gate;
@@ -15,7 +18,8 @@ HalfAdder::~HalfAdder()
     delete nand_gate;
     delete xor_gate;
 }
-
+// Destructor for the HalfAdder class
+// Cleans up dynamically allocated gates
 void HalfAdder::set_input_a(const unsigned short int val)
 {
     and_gate->set_in1(val);
