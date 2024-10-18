@@ -1,21 +1,44 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required(VERSION 3.14)
 
-#https://www.eriksmistad.no/getting-started-with-google-test-on-ubuntu/
-#https://github.com/google/googletest/blob/master/googletest/docs/primer.md
+# Set the path to the installed Google Test
+set(GTEST_ROOT "C:/Users/Huzaif/Desktop/OOAD/googletest/build")
 
+# Find the installed Google Test package
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
 
+# Enable testing
+enable_testing()
+
+# Your existing include and source file definitions
 set(INC_LOGIC 
-../../source/FourBitAdder/intern/AbstractGate.h
-../../source/FourBitAdder/intern/LogicGates.h
+    ../../source/FourBitAdder/intern/AbstractGate.h
+    ../../source/FourBitAdder/intern/LogicGates.h
 )
 
-set(SRC_LOGIC 
-./GTestLogicGates.cpp
+# Assuming you have a target for your main project
+add_library(proj1_FourBitAdder STATIC
+    # Add your project source files here
 )
 
-add_executable(LogicGatesGTests_gtests ${SRC_LOGIC} ${INC_LOGIC})
-target_link_libraries(LogicGatesGTests_gtests proj1_FourBitAdder ${GTEST_LIBRARIES} pthread)
+# LogicGates Tests
+add_executable(LogicGatesGTests_gtests ./GTestLogicGates.cpp ${INC_LOGIC})
+target_link_libraries(LogicGatesGTests_gtests PRIVATE proj1_FourBitAdder GTest::GTest GTest::Main)
 
-# add cmake script for other unittests
+# FourBitAdder Tests
+add_executable(FourBitAdderTests_gtests ./GTestFourBitAdder.cpp ${INC_LOGIC})
+target_link_libraries(FourBitAdderTests_gtests PRIVATE proj1_FourBitAdder GTest::GTest GTest::Main)
+
+# FullAdder Tests
+add_executable(FullAdderTests_gtests ./GTestFullAdder.cpp ${INC_LOGIC})
+target_link_libraries(FullAdderTests_gtests PRIVATE proj1_FourBitAdder GTest::GTest GTest::Main)
+
+# HalfAdder Tests
+add_executable(HalfAdderTests_gtests ./GTestHalfAdder.cpp ${INC_LOGIC})
+target_link_libraries(HalfAdderTests_gtests PRIVATE proj1_FourBitAdder GTest::GTest GTest::Main)
+
+# Add tests
+include(GoogleTest)
+gtest_discover_tests(LogicGatesGTests_gtests)
+gtest_discover_tests(FourBitAdderTests_gtests)
+gtest_discover_tests(FullAdderTests_gtests)
+gtest_discover_tests(HalfAdderTests_gtests)
