@@ -4,7 +4,8 @@
 class FourBitAdderTest : public ::testing::Test {
 protected:
     FourBitAdder* four_bit_adder;
-
+    // SetUp() is called before each test.
+    // It initializes the four_bit_adder object
     void SetUp() override {
         four_bit_adder = new FourBitAdder();
     }
