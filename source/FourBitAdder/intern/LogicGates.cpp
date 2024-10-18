@@ -42,7 +42,12 @@ void AND::update()
         m_usiOut = 0;
     }
 }
-
+/**
+ * Representational function for the AND gate.
+ * 
+ * Returns a string representing the AND gate, 
+ * including its ID and the inherited properties.
+ */
 std::string AND::repr()
 {
     std::string rp = AbstractGate::repr();
