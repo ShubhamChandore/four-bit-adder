@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "FourBitAdder.h"
 
+// Test fixture class for FourBitAdder tests.
+// This class inherits from ::testing::Test and provides setup and teardown methods.
 class FourBitAdderTest : public ::testing::Test {
 protected:
     FourBitAdder* four_bit_adder;
